@@ -38,7 +38,7 @@ We have deployed a single compute node (see the Figure below) but you can simply
 
 
 
-.. image:: file:///C:\Users\ghribi_c\Desktop\icehouse\network-topo1.jpg
+.. image:: https://raw.githubusercontent.com/ChaimaGhribi/OpenStack-Icehouse-Installation/master/images/network-topo1.jpg
 	:height: 600 px
 	:width: 550 px
 	:align: center
