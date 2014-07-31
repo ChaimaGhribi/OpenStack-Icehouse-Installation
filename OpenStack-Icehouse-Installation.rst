@@ -1001,7 +1001,207 @@ The network node runs the Networking plug-in and different agents (see the Figur
 
     source creds
     neutron agent-list
-   
+
+2.3. Compute Node
+-------------------
+
+Finally, let's install the services on the compute node!
+
+It uses KVM as hypervisor and runs nova-compute, the Networking plug-in and layer 2 agent.  
+
+.. image:: https://raw.githubusercontent.com/ChaimaGhribi/OpenStack-Icehouse-Installation/master/images/compute.jpg
+
+* Update and Upgrade your System::
+
+    apt-get update -y && apt-get upgrade -y && apt-get dist-upgrade
+
+
+* Install ntp service::
+    
+    apt-get install -y ntp
+
+* Set the compute node to follow up your conroller node::
+
+   sed -i 's/server ntp.ubuntu.com/server controller/g' /etc/ntp.conf
+
+* Restart NTP service::
+
+    service ntp restart
+
+* Check that your hardware supports virtualization::
+
+    apt-get install -y cpu-checker
+    kvm-ok
+
+* Install and configure kvm::
+
+    apt-get install -y kvm libvirt-bin pm-utils
+
+* Install the Compute packages::
+
+    apt-get install -y nova-compute-kvm python-guestfs
+
+* Make the current kernel readable::
+
+    dpkg-statoverride  --update --add root root 0644 /boot/vmlinuz-$(uname -r)
+
+* Enable this override for all future kernel updates, create the file /etc/kernel/postinst.d/statoverride containing::
+
+    vi /etc/kernel/postinst.d/statoverride
+    #!/bin/sh
+    version="$1"
+    # passing the kernel version is required
+    [ -z "${version}" ] && exit 0
+    dpkg-statoverride --update --add root root 0644 /boot/vmlinuz-${version}
+
+* Make the file executable::
+
+    chmod +x /etc/kernel/postinst.d/statoverride
+
+
+* Modify the /etc/nova/nova.conf like this::
+
+    vi /etc/nova/nova.conf
+    [DEFAULT]
+    auth_strategy = keystone
+    rpc_backend = rabbit
+    rabbit_host = controller
+    my_ip = 10.0.0.31
+    vnc_enabled = True
+    vncserver_listen = 0.0.0.0
+    vncserver_proxyclient_address = 10.0.0.31
+    novncproxy_base_url = http://192.168.100.11:6080/vnc_auto.html
+    glance_host = controller
+    vif_plugging_is_fatal=false
+    vif_plugging_timeout=0
+    
+    [database]
+    connection = mysql://nova:NOVA_DBPASS@controller/nova
+    
+    [keystone_authtoken]
+    auth_uri = http://controller:5000
+    auth_host = controller
+    auth_port = 35357
+    auth_protocol = http
+    admin_tenant_name = service
+    admin_user = nova
+    admin_password = service_pass
+
+* Delete /var/lib/nova/nova.sqlite file::
+    
+    rm /var/lib/nova/nova.sqlite
+
+* Restart nova-compute services::
+
+    service nova-compute restart
+
+
+* Edit /etc/sysctl.conf to contain the following::
+
+    vi /etc/sysctl.conf
+    net.ipv4.ip_forward=1
+    net.ipv4.conf.all.rp_filter=0
+    net.ipv4.conf.default.rp_filter=0
+
+* Implement the changes::
+
+    sysctl -p
+
+* Install the Networking components::
+    
+    apt-get install -y neutron-common neutron-plugin-ml2 neutron-plugin-openvswitch-agent openvswitch-datapath-dkms
+
+
+* Update /etc/neutron/neutron.conf::
+
+    vi /etc/neutron/neutron.conf
+    
+    [DEFAULT]
+    auth_strategy = keystone
+    replace  core_plugin = neutron.plugins.ml2.plugin.Ml2Plugin with
+    core_plugin = ml2
+    service_plugins = router
+    allow_overlapping_ips = True
+    
+    rpc_backend = neutron.openstack.common.rpc.impl_kombu
+    rabbit_host = controller
+    
+    [keystone_authtoken]
+    auth_uri = http://controller:5000
+    auth_host = controller
+    auth_port = 35357
+    auth_protocol = http
+    admin_tenant_name = service
+    admin_user = neutron
+    admin_password = service_pass
+
+
+
+* Configure the Modular Layer 2 (ML2) plug-in::
+    
+    vi /etc/neutron/plugins/ml2/ml2_conf.ini
+    
+    [ml2]
+    type_drivers = gre
+    tenant_network_types = gre
+    mechanism_drivers = openvswitch
+    
+    [ml2_type_gre]
+    tunnel_id_ranges = 1:1000
+    
+    [ovs]
+    local_ip = 10.0.1.31
+    tunnel_type = gre
+    enable_tunneling = True
+    
+    [securitygroup]
+    firewall_driver = neutron.agent.linux.iptables_firewall.OVSHybridIptablesFirewallDriver
+    enable_security_group = True
+
+* Restart the OVS service::
+
+    service openvswitch-switch restart
+
+* Create the bridges::
+
+    #br-int will be used for VM integration
+    ovs-vsctl add-br br-int
+    
+
+* Edit /etc/nova/nova.conf::
+
+    vi /etc/nova/nova.conf
+    
+    [DEFAULT]
+    network_api_class = nova.network.neutronv2.api.API
+    neutron_url = http://controller:9696
+    neutron_auth_strategy = keystone
+    neutron_admin_tenant_name = service
+    neutron_admin_username = neutron
+    neutron_admin_password = service_pass
+    neutron_admin_auth_url = http://controller:35357/v2.0
+    linuxnet_interface_driver = nova.network.linux_net.LinuxOVSInterfaceDriver
+    firewall_driver = nova.virt.firewall.NoopFirewallDriver
+    security_group_api = neutron
+
+
+* Restart nova-compute services::
+
+    service nova-compute restart
+
+* Restart the Open vSwitch (OVS) agent::
+
+    service neutron-plugin-openvswitch-agent restart
+
+* Check Nova is running. The :-) icons indicate that everything is ok !::
+
+    nova-manage service list
+    
+
+That's it !! ;) Just try it! 
+
+Your contributions are welcome, as are questions and requests for help :)
+	
 3. License
 =========
 Institut Mines Télécom - Télécom SudParis  
