@@ -1,7 +1,6 @@
 OpenStack-Icehouse-Installation
 ===============================
 
-In this installation guide, we cover the step-by-step process of installing Openstack Icehouse on Ubuntu.
 In this installation guide, we cover the step-by-step process of installing Openstack Icehouse on Ubuntu 14.04.  We consider a multi-node architecture with Openstack Networking (Neutron) that requires three node types: 
 
 + **Controller Node** that runs management services (keystone, Horizon…) needed for OpenStack to function.
@@ -13,5 +12,4 @@ In this installation guide, we cover the step-by-step process of installing Open
 We have deployed a single compute node (see the Figure below) but you can simply add more compute nodes to our multi-node installation, if needed.  
 
 
-
-.. image:: https://raw.githubusercontent.com/ChaimaGhribi/OpenStack-Icehouse-Installation/master/images/network-topo.jpg
+![Network Configuration Example](https://raw.githubusercontent.com/ChaimaGhribi/OpenStack-Icehouse-Installation/master/images/network-topo.jpg)
