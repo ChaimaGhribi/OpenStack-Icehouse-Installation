@@ -799,8 +799,209 @@ An additional install guide for optional services (Heat, Cinder...) will be prov
 
 Enjoy it !
 
-    
+2.2. Network Node
+------------------
 
+Now, let's move to second step!
+
+The network node runs the Networking plug-in and different agents (see the Figure below).
+
+
+.. image:: https://raw.githubusercontent.com/ChaimaGhribi/OpenStack-Icehouse-Installation/master/images/network.jpg
+
+
+* Update and Upgrade your System::
+
+    apt-get update -y && apt-get upgrade -y && apt-get dist-upgrade
+
+* Install NTP service::
+   
+   apt-get install -y ntp
+
+* Set your network node to follow up your conroller node::
+    
+    sed -i 's/server ntp.ubuntu.com/server controller/g' /etc/ntp.conf
+
+* Restart NTP service::
+
+    service ntp restart
+
+* Install other services::
+
+    apt-get install -y vlan bridge-utils
+
+* Edit /etc/sysctl.conf to contain the following::
+
+    vi /etc/sysctl.conf
+    net.ipv4.ip_forward=1
+    net.ipv4.conf.all.rp_filter=0
+    net.ipv4.conf.default.rp_filter=0
+
+* Implement the changes::
+
+    sysctl -p
+
+* Install the Networking components::
+
+    apt-get install -y neutron-plugin-ml2 neutron-plugin-openvswitch-agent openvswitch-datapath-dkms    dnsmasq neutron-l3-agent neutron-dhcp-agent
+
+* Update /etc/neutron/neutron.conf::
+
+    vi /etc/neutron/neutron.conf
+
+    [DEFAULT]
+    auth_strategy = keystone
+    rpc_backend = neutron.openstack.common.rpc.impl_kombu
+    rabbit_host = controller
+    replace  core_plugin = neutron.plugins.ml2.plugin.Ml2Plugin with
+    core_plugin = ml2
+    service_plugins = router
+    allow_overlapping_ips = True
+    
+    [keystone_authtoken]
+    auth_uri = http://controller:5000
+    auth_host = controller
+    auth_port = 35357
+    auth_protocol = http
+    admin_tenant_name = service
+    admin_user = neutron
+    admin_password = service_pass
+
+* Edit the /etc/neutron/l3_agent.ini::
+
+    vi /etc/neutron/l3_agent.ini
+    
+    [DEFAULT]
+    interface_driver = neutron.agent.linux.interface.OVSInterfaceDriver
+    use_namespaces = True
+
+* Edit the /etc/neutron/dhcp_agent.ini::
+
+    vi /etc/neutron/dhcp_agent.ini
+    
+    [DEFAULT]
+    interface_driver = neutron.agent.linux.interface.OVSInterfaceDriver
+    dhcp_driver = neutron.agent.linux.dhcp.Dnsmasq
+    use_namespaces = True
+
+* Edit the /etc/neutron/metadata_agent.ini::
+
+    vi /etc/neutron/metadata_agent.ini
+    
+    [DEFAULT]
+    auth_url = http://controller:5000/v2.0
+    auth_region = RegionOne
+    
+    admin_tenant_name = service
+    admin_user = neutron
+    admin_password = service_pass
+    metadata_proxy_shared_secrett = helloOpenStack
+
+* Note: On the controller node::
+
+    edit the /etc/nova/nova.conf file
+
+    [DEFAULT]
+    service_neutron_metadata_proxy = true
+    neutron_metadata_proxy_shared_secret = helloOpenStack
+    
+    service nova-api restart
+
+* Edit the /etc/neutron/plugins/ml2/ml2_conf.ini::
+
+    vi /etc/neutron/plugins/ml2/ml2_conf.ini
+    
+    [ml2]
+    type_drivers = gre
+    tenant_network_types = gre
+    mechanism_drivers = openvswitch
+    
+    [ml2_type_gre]
+    tunnel_id_ranges = 1:1000
+    
+    [ovs]
+    local_ip = 10.0.1.21
+    tunnel_type = gre
+    enable_tunneling = True
+    
+    [securitygroup]
+    firewall_driver = neutron.agent.linux.iptables_firewall.OVSHybridIptablesFirewallDriver
+    enable_security_group = True
+
+* Restart openVSwitch::
+
+    service openvswitch-switch restart
+
+* Create the bridges::
+
+    #br-int will be used for VM integration
+    ovs-vsctl add-br br-int
+
+    #br-ex is used to make to VM accessible from the internet
+    ovs-vsctl add-br br-ex
+
+
+* Add the eth2 to the br-ex::
+
+    #Internet connectivity will be lost after this step but this won't affect OpenStack's work
+            ovs-vsctl add-port br-ex eth2
+
+* Edit /etc/network/interfaces::
+
+    vi /etc/network/interfaces
+    
+    # The public network interface
+    auto eth2
+    iface eth2 inet manual
+    up ifconfig $IFACE 0.0.0.0 up
+    up ip link set $IFACE promisc on
+    down ip link set $IFACE promisc off
+    down ifconfig $IFACE down
+  
+    auto br-ex
+    iface br-ex inet static
+    address 192.168.100.21
+    netmask 255.255.255.0
+    gateway 192.168.100.1
+    dns-nameservers 8.8.8.8
+
+* Restart network::
+
+    ifdown eth2 && ifup eth2
+
+    ifdown br-ex && ifup br-ex
+
+
+* Restart all neutron services::
+
+    service neutron-plugin-openvswitch-agent restart
+    service neutron-dhcp-agent restart
+    service neutron-l3-agent restart
+    service neutron-metadata-agent restart
+    service dnsmasq restart
+
+* Check status::
+
+    service neutron-plugin-openvswitch-agent status
+    service neutron-dhcp-agent status
+    service neutron-l3-agent status
+    service neutron-metadata-agent status
+    service dnsmasq status
+
+* Create a simple credential file::
+
+    vi creds
+    #Paste the following:
+    export OS_TENANT_NAME=admin
+    export OS_USERNAME=admin
+    export OS_PASSWORD=admin_pass
+    export OS_AUTH_URL="http://192.168.100.11:5000/v2.0/"
+
+* Check Neutron agents::
+
+    source creds
+    neutron agent-list
+   
 3. License
 =========
 Institut Mines Télécom - Télécom SudParis  
