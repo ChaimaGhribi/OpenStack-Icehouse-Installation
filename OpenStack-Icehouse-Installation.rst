@@ -28,7 +28,7 @@ Copyright (C) Marouen Mechtri
 
 In this installation guide, we cover the step-by-step process of installing Openstack Icehouse on Ubuntu 14.04.  We consider a multi-node architecture with Openstack Networking (Neutron) that requires three node types: 
 
-+ **Controller Node** that runs management services (keystone, HorizonÖ) needed for OpenStack to function.
++ **Controller Node** that runs management services (keystone, Horizon‚Ä¶) needed for OpenStack to function.
 
 + **Network Node** that runs networking services and is responsible for virtual network provisioning  and for connecting virtual machines to external networks.
 
@@ -52,7 +52,7 @@ For OpenStack Multi-Node setup you need to create three networks:
 
 In the next subsections, we describe in details how to set up, configure and test the network architecture. We want to make sure everything is ok before install ;)
 
-So, letís prepare the nodes for OpenStack installation!
+So, let‚Äôs prepare the nodes for OpenStack installation!
 
 1.1. Configure Controller node
 ------------------------------
@@ -633,10 +633,177 @@ An additional install guide for optional services (Heat, Cinder...) will be prov
     source creds
     nova image-list
     
+2.1.5 Install the network Service (Neutron)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* Install the Neutron server and the OpenVSwitch packages::
+
+    apt-get install -y neutron-server neutron-plugin-ml2
+
+* Create a MySql database for Neutron::
+
+    mysql -u root -p
+  
+    CREATE DATABASE neutron;
+    GRANT ALL PRIVILEGES ON neutron.* TO neutron@'localhost' IDENTIFIED BY 'NEUTRON_DBPASS';
+    GRANT ALL PRIVILEGES ON neutron.* TO neutron@'%' IDENTIFIED BY 'NEUTRON_DBPASS';
+    
+    exit;
+
+* Configure service user and role::
+
+    keystone user-create --name=neutron --pass=service_pass --email=neutron@domain.com
+    keystone user-role-add --user=neutron --tenant=service --role=admin
+
+* Register the service and create the endpoint::
+
+    keystone service-create --name=neutron --type=network --description="OpenStack Networking"
+    
+    keystone endpoint-create \
+    --service-id=$(keystone service-list | awk '/ network / {print $2}') \
+    --publicurl=http://192.168.100.11:9696 \
+    --internalurl=http://controller:9696 \
+    --adminurl=http://controller:9696 
+
+
+* Update /etc/neutron/neutron.conf::
+      
+    vi /etc/neutron/neutron.conf
+    
+    [database]
+    replace connection = sqlite:////var/lib/neutron/neutron.sqlite with
+    connection = mysql://neutron:NEUTRON_DBPASS@controller/neutron
+    
+    [DEFAULT]
+    replace  core_plugin = neutron.plugins.ml2.plugin.Ml2Plugin with
+    core_plugin = ml2
+    service_plugins = router
+    allow_overlapping_ips = True
+    
+    auth_strategy = keystone
+    rpc_backend = neutron.openstack.common.rpc.impl_kombu
+    rabbit_host = controller
+    
+    notify_nova_on_port_status_changes = True
+    notify_nova_on_port_data_changes = True
+    nova_url = http://controller:8774/v2
+    nova_admin_username = nova
+    nova_admin_tenant_id = $(keystone tenant-list | awk '/ service / { print $2 }')
+    nova_admin_password = service_pass
+    nova_admin_auth_url = http://controller:35357/v2.0
+    
+    [keystone_authtoken]
+    auth_uri = http://controller:5000
+    auth_host = controller
+    auth_port = 35357
+    auth_protocol = http
+    admin_tenant_name = service
+    admin_user = neutron
+    admin_password = service_pass
+    
+    notify_nova_on_port_status_changes = True
+    notify_nova_on_port_data_changes = True
+    nova_url = http://controller:8774/v2
+    nova_admin_username = nova
+    nova_admin_tenant_id = $(keystone tenant-list | awk '/ service / { print $2 }')
+    nova_admin_password = service_pass
+    nova_admin_auth_url = http://controller:35357/v2.0
+
+
+* Configure the Modular Layer 2 (ML2) plug-in::
+
+    vi /etc/neutron/plugins/ml2/ml2_conf.ini
+    
+    [ml2]
+    type_drivers = gre
+    tenant_network_types = gre
+    mechanism_drivers = openvswitch
+    
+    [ml2_type_gre]
+    tunnel_id_ranges = 1:1000
+    
+    [securitygroup]
+    firewall_driver = neutron.agent.linux.iptables_firewall.OVSHybridIptablesFirewallDriver
+    enable_security_group = True
+
+
+* Configure Compute to use Networking::
+
+    add in /etc/nova/nova.conf
+        
+    vi /etc/nova/nova.conf
+    
+    [DEFAULT]
+    network_api_class=nova.network.neutronv2.api.API
+    neutron_url=http://controller:9696
+    neutron_auth_strategy=keystone
+    neutron_admin_tenant_name=service
+    neutron_admin_username=neutron
+    neutron_admin_password=service_pass
+    neutron_admin_auth_url=http://controller:35357/v2.0
+    libvirt_vif_driver=nova.virt.libvirt.vif.LibvirtHybridOVSBridgeDriver
+    linuxnet_interface_driver=nova.network.linux_net.LinuxOVSInterfaceDriver
+    firewall_driver=nova.virt.firewall.NoopFirewallDriver
+    security_group_api=neutron
+
+
+* Restart the Compute services::
+    
+    service nova-api restart
+    service nova-scheduler restart
+    service nova-conductor restart
+
+* Restart the Networking service::
+
+    service neutron-server restart
+
+
+2.1.6 Install the dashboard Service (Horizon)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* Install the required packages::
+
+    apt-get install -y apache2 memcached libapache2-mod-wsgi openstack-dashboard
+
+* You can remove the openstack-dashboard-ubuntu-theme package::
+
+    apt-get remove -y --purge openstack-dashboard-ubuntu-theme
+
+* Edit /etc/openstack-dashboard/local_settings.py::
+    
+    vi /etc/openstack-dashboard/local_settings.py
+    ALLOWED_HOSTS = ['localhost', '192.168.100.11']
+    OPENSTACK_HOST = "controller"
+
+* Reload Apache and memcached::
+
+    service apache2 restart; service memcached restart
+
+* Note::
+
+    If you have this error: apache2: Could not reliably determine the server's fully qualified domain name, using 127.0.1.1. 
+    Set the 'ServerName' directive  globally to suppress this message‚Äù
+
+    Solution: Edit /etc/apache2/apache2.conf
+
+    vi /etc/apache2/apache2.conf
+    Add the following new line end of file:
+    ServerName localhost
+
+* Reload Apache and memcached::
+
+    service apache2 restart; service memcached restart
+
+
+* Check OpenStack Dashboard at http://192.168.100.11/horizon. login admin/admin_pass
+
+Enjoy it !
+
+    
 
 3. License
 =========
-Institut Mines TÈlÈcom - TÈlÈcom SudParis  
+Institut Mines T√©l√©com - T√©l√©com SudParis  
 
 Copyright (C) 2014  Authors
 
