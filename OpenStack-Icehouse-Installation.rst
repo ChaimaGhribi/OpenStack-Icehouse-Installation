@@ -39,8 +39,6 @@ We have deployed a single compute node (see the Figure below) but you can simply
 
 
 .. image:: https://raw.githubusercontent.com/ChaimaGhribi/OpenStack-Icehouse-Installation/master/images/network-topo1.jpg
-	:align: center
-
 
 For OpenStack Multi-Node setup you need to create three networks:
 
@@ -287,10 +285,7 @@ An additional install guide for optional services (Heat, Cinder...) will be prov
 
 
 
-.. image:: file:///C:\Users\ghribi_c\Desktop\icehouse\controller.jpg
-	:height: 450 px
-	:width: 400 px
-	:align: center
+.. image:: https://raw.githubusercontent.com/ChaimaGhribi/OpenStack-Icehouse-Installation/master/images/controller.jpg
     
 2.1.1 Install the supporting services (MySQL and RabbitMQ)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
