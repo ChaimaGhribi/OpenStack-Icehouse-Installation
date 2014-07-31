@@ -286,7 +286,8 @@ An additional install guide for optional services (Heat, Cinder...) will be prov
 
 
 .. image:: https://raw.githubusercontent.com/ChaimaGhribi/OpenStack-Icehouse-Installation/master/images/controller.jpg
-    :align: center
+    
+	:align: center
 	
 2.1.1 Install the supporting services (MySQL and RabbitMQ)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -809,7 +810,8 @@ The network node runs the Networking plug-in and different agents (see the Figur
 
 
 .. image:: https://raw.githubusercontent.com/ChaimaGhribi/OpenStack-Icehouse-Installation/master/images/network.jpg
-     :align: center
+     
+	 :align: center
 
 * Update and Upgrade your System::
 
@@ -1011,6 +1013,7 @@ Finally, let's install the services on the compute node!
 It uses KVM as hypervisor and runs nova-compute, the Networking plug-in and layer 2 agent.  
 
 .. image:: https://raw.githubusercontent.com/ChaimaGhribi/OpenStack-Icehouse-Installation/master/images/compute.jpg
+	
 	:align: center
 
 * Update and Upgrade your System::
