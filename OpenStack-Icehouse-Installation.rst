@@ -38,7 +38,7 @@ We have deployed a single compute node (see the Figure below) but you can simply
 
 
 
-.. image:: https://raw.githubusercontent.com/ChaimaGhribi/OpenStack-Icehouse-Installation/master/images/network-topo1.jpg
+.. image:: https://raw.githubusercontent.com/ChaimaGhribi/OpenStack-Icehouse-Installation/master/images/network-topo.jpg
 
 For OpenStack Multi-Node setup you need to create three networks:
 
@@ -843,7 +843,7 @@ The network node runs the Networking plug-in and different agents (see the Figur
 
 * Install the Networking components::
 
-    apt-get install -y neutron-plugin-ml2 neutron-plugin-openvswitch-agent openvswitch-datapath-dkms    dnsmasq neutron-l3-agent neutron-dhcp-agent
+    apt-get install -y neutron-plugin-ml2 neutron-plugin-openvswitch-agent openvswitch-datapath-dkms dnsmasq neutron-l3-agent neutron-dhcp-agent
 
 * Update /etc/neutron/neutron.conf::
 
