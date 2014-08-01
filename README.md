@@ -13,3 +13,5 @@ We have deployed a single compute node (see the Figure below) but you can simply
 
 
 ![Network Configuration Example](https://raw.githubusercontent.com/ChaimaGhribi/OpenStack-Icehouse-Installation/master/images/network-topo.jpg)
+
+The Installation guide is available here [OpenStack-Icehouse-Installation](https://github.com/ChaimaGhribi/OpenStack-Icehouse-Installation/blob/master/OpenStack-Icehouse-Installation.rst).
