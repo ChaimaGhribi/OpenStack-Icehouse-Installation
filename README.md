@@ -11,7 +11,6 @@ In this installation guide, we cover the step-by-step process of installing Open
 
 We have deployed a single compute node (see the Figure below) but you can simply add more compute nodes to our multi-node installation, if needed.  
 
+The Installation guide is available here [OpenStack-Icehouse-Installation](https://github.com/ChaimaGhribi/OpenStack-Icehouse-Installation/blob/master/OpenStack-Icehouse-Installation.rst).
 
 ![Network Configuration Example](https://raw.githubusercontent.com/ChaimaGhribi/OpenStack-Icehouse-Installation/master/images/network-topo.jpg)
-
-The Installation guide is available here [OpenStack-Icehouse-Installation](https://github.com/ChaimaGhribi/OpenStack-Icehouse-Installation/blob/master/OpenStack-Icehouse-Installation.rst).
