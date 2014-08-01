@@ -15,7 +15,7 @@ OpenStack Icehouse Installation - Multi Node
 
 Copyright (C) Chaima Ghribi
 
-Copyright (C) `Marouen Mechtri <https://www.linkedin.com/in/mechtri>`_
+Copyright (C) Marouen Mechtri `.. image:: http://delphi.com/images/chrome/LinkedIn_Icon.png <https://www.linkedin.com/in/mechtri>`_
 
 
 ================================
