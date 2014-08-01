@@ -13,7 +13,7 @@ OpenStack Icehouse Installation - Multi Node
 
 **Authors:**
 
-Copyright (C) Chaima Ghribi
+Copyright (C) `Chaima Ghribi <https://www.linkedin.com/profile/view?id=53659267&trk=nav_responsive_tab_profile>`_
 
 Copyright (C) `Marouen Mechtri <https://www.linkedin.com/in/mechtri>`_
 
