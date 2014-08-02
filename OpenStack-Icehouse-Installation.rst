@@ -2,7 +2,7 @@
 OpenStack Icehouse Installation - Multi Node
 ####
 
-Welcome to OpenStack Icehouse installation manual!
+Welcome to OpenStack Icehouse installation manual !
 
 This document is based on `the OpenStack Official Documentation <http://docs.openstack.org/icehouse/install-guide/install/apt/content/index.html>`_ for Icehouse. 
 
