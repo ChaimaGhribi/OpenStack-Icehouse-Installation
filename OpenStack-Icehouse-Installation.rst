@@ -1210,6 +1210,7 @@ Your contributions are welcome, as are questions and requests for help :)
 A special wink at all the interesting works on the previous versions of OpenStack ;) especially: 
 
 https://github.com/fornyx/OpenStack-Havana-Install-Guide/blob/master/OpenStack-Havana-Install-Guide.rst
+
 https://github.com/mseknibilel/OpenStack-Grizzly-Install-Guide/blob/OVS_MultiNode/OpenStack_Grizzly_Install_Guide.rst
 
 Hope this manual will be helpful and simple! 	
