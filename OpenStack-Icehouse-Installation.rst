@@ -2,10 +2,13 @@
 OpenStack Icehouse Installation - Multi Node
 ####
 
+Welcome to OpenStack Icehouse installation manual!
 
+This document is based on `the OpenStack Official Documentation <http://docs.openstack.org/icehouse/install-guide/install/apt/content/index.html>`_ for Icehouse. 
 
 :Version: 1.0
-:Source: https://github.com/ChaimaGhribi/OpenStack-Icehouse-Installation
+:Authors: Chaima Ghribi and Marouen Mechtri
+:License: Apache License Version 2.0
 :Keywords: OpenStack, Icehouse, Heat, Neutron, Nova, Ubuntu 14.04, Glance, Horizon
 
 
@@ -1203,7 +1206,14 @@ It uses KVM as hypervisor and runs nova-compute, the Networking plug-in and laye
 That's it !! ;) Just try it! 
 
 Your contributions are welcome, as are questions and requests for help :)
-	
+
+A special wink at all the interesting works on the previous versions of OpenStack ;) especially: 
+
+`Havana <https://github.com/fornyx/OpenStack-Havana-Install-Guide/blob/master/OpenStack-Havana-Install-Guide.rst>`_
+`Grizzly <https://github.com/mseknibilel/OpenStack-Grizzly-Install-Guide/blob/OVS_MultiNode/OpenStack_Grizzly_Install_Guide.rst>`_
+
+Hope this manual will be helpful and simple! 	
+
 3. License
 =========
 Institut Mines Télécom - Télécom SudParis  
