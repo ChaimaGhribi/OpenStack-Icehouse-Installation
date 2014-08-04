@@ -894,7 +894,7 @@ The network node runs the Networking plug-in and different agents (see the Figur
     
     [DEFAULT]
     auth_url = http://controller:5000/v2.0
-    auth_region = RegionOne
+    auth_region = regionOne
     
     admin_tenant_name = service
     admin_user = neutron
