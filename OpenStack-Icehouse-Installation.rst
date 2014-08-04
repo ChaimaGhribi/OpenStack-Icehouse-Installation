@@ -899,7 +899,8 @@ The network node runs the Networking plug-in and different agents (see the Figur
     admin_tenant_name = service
     admin_user = neutron
     admin_password = service_pass
-    metadata_proxy_shared_secrett = helloOpenStack
+    nova_metadata_ip = controller
+    metadata_proxy_shared_secret = helloOpenStack
 
 * Note: On the controller node::
 
