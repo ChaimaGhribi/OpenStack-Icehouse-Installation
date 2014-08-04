@@ -27,7 +27,7 @@ Copyright (C) `Marouen Mechtri <https://www.linkedin.com/in/mechtri>`_
    
 
 1. Basic Architecture & Network Configuration
-==========================================
+=============================================
 
 In this installation guide, we cover the step-by-step process of installing Openstack Icehouse on Ubuntu 14.04.  We consider a multi-node architecture with Openstack Networking (Neutron) that requires three node types: 
 
@@ -271,7 +271,7 @@ We recommend that you verify network connectivity to the internet and among the 
     
     
 2. Install 
-================
+==========
 
 Now everything is ok :) So let's go ahead and install it !
 
@@ -452,7 +452,7 @@ An additional install guide for optional services (Heat, Cinder...) will be prov
     keystone user-role-list --user admin --tenant admin
 
 2.1.3 Install the image Service (Glance)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 * Install Glance packages::
 
@@ -551,7 +551,7 @@ An additional install guide for optional services (Heat, Cinder...) will be prov
 
 
 2.1.4 Install the compute Service (Nova)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 * Install nova packages::
 
@@ -638,7 +638,7 @@ An additional install guide for optional services (Heat, Cinder...) will be prov
     nova image-list
     
 2.1.5 Install the network Service (Neutron)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 * Install the Neutron server and the OpenVSwitch packages::
 
@@ -756,7 +756,7 @@ An additional install guide for optional services (Heat, Cinder...) will be prov
 
 
 2.1.6 Install the dashboard Service (Horizon)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 * Install the required packages::
 
@@ -1001,7 +1001,7 @@ The network node runs the Networking plug-in and different agents (see the Figur
     neutron agent-list
 
 2.3. Compute Node
--------------------
+-----------------
 
 Finally, let's install the services on the compute node!
 
@@ -1217,7 +1217,7 @@ https://github.com/mseknibilel/OpenStack-Grizzly-Install-Guide/blob/OVS_MultiNod
 
 
 3. License
-=========
+==========
 Institut Mines Télécom - Télécom SudParis  
 
 Copyright (C) 2014  Authors
