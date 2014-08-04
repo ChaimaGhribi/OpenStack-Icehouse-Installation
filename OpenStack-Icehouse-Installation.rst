@@ -1203,9 +1203,16 @@ It uses KVM as hypervisor and runs nova-compute, the Networking plug-in and laye
     nova-manage service list
     
 
-That's it !! ;) Just try it! 
+That's it !! ;) Just try it!
+
+If you want to create your first instance with Neutron, follow the instructions in our VM creation guide available
+here [Create-First-Instance-with-Neutron](https://github.com/ChaimaGhribi/OpenStack-Icehouse-Installation/blob/master/Create-your-first-instance-with-Neutron.rst).   
+
 
 Your contributions are welcome, as are questions and requests for help :)
+
+Hope this manual will be helpful and simple!
+
 
 A special wink at all the interesting works on the previous versions of OpenStack ;) especially: 
 
@@ -1213,7 +1220,7 @@ https://github.com/fornyx/OpenStack-Havana-Install-Guide/blob/master/OpenStack-H
 
 https://github.com/mseknibilel/OpenStack-Grizzly-Install-Guide/blob/OVS_MultiNode/OpenStack_Grizzly_Install_Guide.rst
 
-Hope this manual will be helpful and simple! 	
+
 
 3. License
 =========

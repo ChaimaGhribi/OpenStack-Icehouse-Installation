@@ -161,9 +161,40 @@ the instance will connect.
     # ssh into your vm using its ip address:
     ssh cirros@192.168.100.102
 
+Here is a snapshot of the Horizon dashboard interface after instance launching:
+ 	
 .. image:: https://raw.githubusercontent.com/ChaimaGhribi/OpenStack-Icehouse-Installation/master/images/Instance-creation.png
 
 	
 Now you are finally done! You can enjoy your new instance ;)
 
 Do not hesitate to contact to us for any question or suggestion :)
+
+License
+=======
+Institut Mines Télécom - Télécom SudParis  
+
+Copyright (C) 2014  Authors
+
+Original Authors - Chaima Ghribi and Marouen Mechtri
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except 
+
+in compliance with the License. You may obtain a copy of the License at::
+
+    http://www.apache.org/licenses/LICENSE-2.0
+    
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+
+Contacts
+========
+
+Chaima Ghribi: chaima.ghribi@it-sudparis.eu
+
+Marouen Mechtri : marouen.mechtri@it-sudparis.eu

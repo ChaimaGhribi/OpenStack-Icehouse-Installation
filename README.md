@@ -14,3 +14,7 @@ We have deployed a single compute node (see the Figure below) but you can simply
 The Installation guide is available here [OpenStack-Icehouse-Installation](https://github.com/ChaimaGhribi/OpenStack-Icehouse-Installation/blob/master/OpenStack-Icehouse-Installation.rst).
 
 ![Network Configuration Example](https://raw.githubusercontent.com/ChaimaGhribi/OpenStack-Icehouse-Installation/master/images/network-topo.jpg)
+
+
+If you want to create your first instance with Neutron, follow the instructions in our VM creation guide available
+here [Create-First-Instance-with-Neutron](https://github.com/ChaimaGhribi/OpenStack-Icehouse-Installation/blob/master/Create-your-first-instance-with-Neutron.rst).   
