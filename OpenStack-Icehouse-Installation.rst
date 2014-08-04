@@ -1206,7 +1206,7 @@ It uses KVM as hypervisor and runs nova-compute, the Networking plug-in and laye
 That's it !! ;) Just try it!
 
 If you want to create your first instance with Neutron, follow the instructions in our VM creation guide available
-here [Create-First-Instance-with-Neutron](https://github.com/ChaimaGhribi/OpenStack-Icehouse-Installation/blob/master/Create-your-first-instance-with-Neutron.rst).   
+here `Create-First-Instance-with-Neutron <https://github.com/ChaimaGhribi/OpenStack-Icehouse-Installation/blob/master/Create-your-first-instance-with-Neutron.rst>`_.   
 
 
 Your contributions are welcome, as are questions and requests for help :)
