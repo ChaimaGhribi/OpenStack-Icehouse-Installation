@@ -944,7 +944,7 @@ The network node runs the Networking plug-in and different agents (see the Figur
 * Add the eth2 to the br-ex::
 
     #Internet connectivity will be lost after this step but this won't affect OpenStack's work
-            ovs-vsctl add-port br-ex eth2
+    ovs-vsctl add-port br-ex eth2
 
 * Edit /etc/network/interfaces::
 
