@@ -898,6 +898,8 @@ The network node runs the Networking plug-in and different agents (see the Figur
 * Note: On the controller node::
 
     edit the /etc/nova/nova.conf file
+    
+    vi /etc/nova/nova.conf
 
     [DEFAULT]
     service_neutron_metadata_proxy = true
