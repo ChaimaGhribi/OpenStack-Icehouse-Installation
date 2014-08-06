@@ -86,7 +86,7 @@ the instance will connect.
     neutron router-create router1
     
     #Attach the router to the internal subnet:
-    neutron router-interface-add router1 int-subnet
+    neutron router-interface-add router1 int-net
     
     #Attach the router to the external network by setting it as the gateway:
     neutron router-gateway-set router1 ext-net
