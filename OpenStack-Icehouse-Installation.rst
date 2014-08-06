@@ -840,7 +840,7 @@ The network node runs the Networking plug-in and different agents (see the Figur
 
 * Install the Networking components::
 
-    apt-get install -y neutron-plugin-ml2 neutron-plugin-openvswitch-agent openvswitch-datapath-dkms dnsmasq neutron-l3-agent neutron-dhcp-agent
+    apt-get install -y neutron-plugin-ml2 neutron-plugin-openvswitch-agent dnsmasq neutron-l3-agent neutron-dhcp-agent
 
 * Update /etc/neutron/neutron.conf::
 
@@ -1108,7 +1108,7 @@ It uses KVM as hypervisor and runs nova-compute, the Networking plug-in and laye
 
 * Install the Networking components::
     
-    apt-get install -y neutron-common neutron-plugin-ml2 neutron-plugin-openvswitch-agent openvswitch-datapath-dkms
+    apt-get install -y neutron-common neutron-plugin-ml2 neutron-plugin-openvswitch-agent
 
 
 * Update /etc/neutron/neutron.conf::
