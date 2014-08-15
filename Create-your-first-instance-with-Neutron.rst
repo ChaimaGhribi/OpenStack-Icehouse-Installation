@@ -75,7 +75,7 @@ the instance will connect.
     
     #Create the subnet for the internal network:
     neutron subnet-create int-net --name int-subnet \
-    --gateway 172.16.1.1 172.16.1.0/24
+    --dns-nameserver 8.8.8.8 --gateway 172.16.1.1 172.16.1.0/24
 
 
 * Create a router on the internal network and attach it to the external network::
