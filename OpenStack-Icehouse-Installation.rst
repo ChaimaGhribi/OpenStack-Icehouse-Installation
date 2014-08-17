@@ -1185,7 +1185,7 @@ It uses KVM as hypervisor and runs nova-compute, the Networking plug-in and laye
     firewall_driver = nova.virt.firewall.NoopFirewallDriver
     security_group_api = neutron
 
-* Edit /etc/nova/nova-compute.conf with the correct hypervizor type (set to qemu if using virtulbox, kvm is default) ::
+* Edit /etc/nova/nova-compute.conf with the correct hypervisor type (set to qemu if using virtualbox for example, kvm is default) ::
 
     vi /etc/nova/nova-compute.conf
     
