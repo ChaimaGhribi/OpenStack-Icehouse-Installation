@@ -26,8 +26,8 @@ Copyright (C) `Marouen Mechtri <https://www.linkedin.com/in/mechtri>`_
 .. contents::
    
 
-1. Basic Architecture & Network Configuration
-=============================================
+Basic Architecture & Network Configuration
+==========================================
 
 In this installation guide, we cover the step-by-step process of installing Openstack Icehouse on Ubuntu 14.04.  We consider a multi-node architecture with Openstack Networking (Neutron) that requires three node types: 
 
@@ -57,8 +57,8 @@ In the next subsections, we describe in details how to set up, configure and tes
 
 So, let’s prepare the nodes for OpenStack installation!
 
-1.1. Configure Controller node
-------------------------------
+Configure Controller node
+-------------------------
 
 The controller node has two Network Interfaces: eth0 is internal (used for connectivity for OpenStack nodes) and eth1 is external.
 
