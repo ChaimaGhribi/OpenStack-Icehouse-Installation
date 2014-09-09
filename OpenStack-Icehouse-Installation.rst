@@ -111,8 +111,8 @@ The controller node has two Network Interfaces: eth0 is internal (used for conne
     ifdown eth1 && ifup eth1
         
     
-1.2. Configure Network node
----------------------------
+Configure Network node
+----------------------
 
 The network node has three network Interfaces: eth0 for management use: eth1
 for connectivity between VMs and eth2 for external connectivity.
@@ -176,8 +176,8 @@ for connectivity between VMs and eth2 for external connectivity.
     ifdown eth2 && ifup eth2
 
 
-1.3. Configure Compute node
----------------------------
+Configure Compute node
+----------------------
 
 The network node has two network Interfaces: eth0 for management use and 
 eth1 for connectivity between VMs.
@@ -230,8 +230,8 @@ eth1 for connectivity between VMs.
     ifdown eth1 && ifup eth1
 
 
-1.4. Verify connectivity
-------------------------
+Verify connectivity
+-------------------
 
 We recommend that you verify network connectivity to the internet and among the nodes before proceeding further.
 
@@ -270,14 +270,14 @@ We recommend that you verify network connectivity to the internet and among the 
     ping 10.0.1.21
     
     
-2. Install 
-==========
+Install 
+=======
 
 Now everything is ok :) So let's go ahead and install it !
 
 
-2.1. Controller Node
--------------------
+Controller Node
+---------------
 
 Let's start with the controller ! the cornerstone !
 
@@ -291,8 +291,8 @@ An additional install guide for optional services (Heat, Cinder...) will be prov
 .. image:: https://raw.githubusercontent.com/ChaimaGhribi/OpenStack-Icehouse-Installation/master/images/controller.jpg
     	:align: center
 	
-2.1.1 Install the supporting services (MySQL and RabbitMQ)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Install the supporting services (MySQL and RabbitMQ)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 * Update and Upgrade your System::
     
