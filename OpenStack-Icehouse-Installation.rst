@@ -26,7 +26,7 @@ Copyright (C) `Marouen Mechtri <https://www.linkedin.com/in/mechtri>`_
 .. contents::
    
 
-Basic Architecture & Network Configuration
+Basic Architecture and Network Configuration
 ==========================================
 
 In this installation guide, we cover the step-by-step process of installing Openstack Icehouse on Ubuntu 14.04.  We consider a multi-node architecture with Openstack Networking (Neutron) that requires three node types: 
