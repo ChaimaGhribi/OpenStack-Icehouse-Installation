@@ -337,8 +337,8 @@ Install the supporting services (MySQL and RabbitMQ)
 
 
 
-2.1.2 Install the Identity Service (Keystone)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Install the Identity Service (Keystone)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Install keystone packages::
 
     apt-get install -y keystone
@@ -451,8 +451,8 @@ Install the supporting services (MySQL and RabbitMQ)
     keystone user-list
     keystone user-role-list --user admin --tenant admin
 
-2.1.3 Install the image Service (Glance)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Install the image Service (Glance)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 * Install Glance packages::
 
@@ -550,8 +550,8 @@ Install the supporting services (MySQL and RabbitMQ)
     glance image-list
 
 
-2.1.4 Install the compute Service (Nova)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Install the compute Service (Nova)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 * Install nova packages::
 
@@ -637,8 +637,8 @@ Install the supporting services (MySQL and RabbitMQ)
     source creds
     nova image-list
     
-2.1.5 Install the network Service (Neutron)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Install the network Service (Neutron)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 * Install the Neutron server and the OpenVSwitch packages::
 
@@ -755,8 +755,8 @@ Install the supporting services (MySQL and RabbitMQ)
     service neutron-server restart
 
 
-2.1.6 Install the dashboard Service (Horizon)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Install the dashboard Service (Horizon)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 * Install the required packages::
 
@@ -796,8 +796,8 @@ Install the supporting services (MySQL and RabbitMQ)
 
 Enjoy it !
 
-2.2. Network Node
-------------------
+Network Node
+------------
 
 Now, let's move to second step!
 
@@ -1002,8 +1002,8 @@ The network node runs the Networking plug-in and different agents (see the Figur
     source creds
     neutron agent-list
 
-2.3. Compute Node
------------------
+Compute Node
+------------
 
 Finally, let's install the services on the compute node!
 
@@ -1227,8 +1227,8 @@ https://github.com/mseknibilel/OpenStack-Grizzly-Install-Guide/blob/OVS_MultiNod
 
 
 
-3. License
-==========
+License
+=======
 Institut Mines Télécom - Télécom SudParis  
 
 Copyright (C) 2014  Authors
@@ -1249,8 +1249,8 @@ in compliance with the License. You may obtain a copy of the License at::
     limitations under the License.
 
 
-4. Contacts
-===========
+Contacts
+========
 
 Chaima Ghribi: chaima.ghribi@it-sudparis.eu
 
