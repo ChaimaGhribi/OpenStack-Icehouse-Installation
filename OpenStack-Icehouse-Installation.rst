@@ -48,7 +48,7 @@ For OpenStack Multi-Node setup you need to create three networks:
 + **Management Network** (10.0.0.0/24): A network segment used for administration, not accessible to the public Internet.
 
 
-+ **VM Traffic Network** (10.0.1.0/24): This network is used as internal network for traffic between virtual machines in OpenStack, and between the virtual machines and the network nodes that provide l3 routes out to the public network.
++ **VM Traffic Network** (10.0.1.0/24): This network is used as internal network for traffic between virtual machines in OpenStack, and between the virtual machines and the network nodes that provide L3 routes out to the public network.
 
 + **Public Network** (192.168.100.0/24): This network is connected to the controller nodes so users can access the OpenStack interfaces, and connected to the network nodes to provide VMs with publicly routable traffic functionality.
 
