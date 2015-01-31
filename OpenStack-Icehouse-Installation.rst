@@ -984,8 +984,8 @@ The network node runs the Networking plug-in and different agents (see the Figur
 
     # stop named service
     service bind9 stop
-    service dnsmasp start
-    
+    service dnsmasq restart
+
 * Check status::
 
     service neutron-plugin-openvswitch-agent status
