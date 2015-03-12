@@ -407,7 +407,7 @@ Install the Identity Service (Keystone)
     keystone service-create --name=keystone --type=identity --description="OpenStack Identity"
     
     keystone endpoint-create \
-    --service-id=$(keystone service-list | awk '/ identity / {print $2}') \
+    --service=$(keystone service-list | awk '/ identity / {print $2}') \
     --publicurl=http://192.168.100.11:5000/v2.0 \
     --internalurl=http://controller:5000/v2.0 \
     --adminurl=http://controller:35357/v2.0
@@ -478,7 +478,7 @@ Install the image Service (Glance)
 
     keystone service-create --name=glance --type=image --description="OpenStack Image Service"
     keystone endpoint-create \
-    --service-id=$(keystone service-list | awk '/ image / {print $2}') \
+    --service=$(keystone service-list | awk '/ image / {print $2}') \
     --publicurl=http://192.168.100.11:9292 \
     --internalurl=http://controller:9292 \
     --adminurl=http://controller:9292
@@ -578,7 +578,7 @@ Install the compute Service (Nova)
     
     keystone service-create --name=nova --type=compute --description="OpenStack Compute"
     keystone endpoint-create \
-    --service-id=$(keystone service-list | awk '/ compute / {print $2}') \
+    --service=$(keystone service-list | awk '/ compute / {print $2}') \
     --publicurl=http://192.168.100.11:8774/v2/%\(tenant_id\)s \
     --internalurl=http://controller:8774/v2/%\(tenant_id\)s \
     --adminurl=http://controller:8774/v2/%\(tenant_id\)s
@@ -664,7 +664,7 @@ Install the network Service (Neutron)
     keystone service-create --name=neutron --type=network --description="OpenStack Networking"
     
     keystone endpoint-create \
-    --service-id=$(keystone service-list | awk '/ network / {print $2}') \
+    --service=$(keystone service-list | awk '/ network / {print $2}') \
     --publicurl=http://192.168.100.11:9696 \
     --internalurl=http://controller:9696 \
     --adminurl=http://controller:9696 
