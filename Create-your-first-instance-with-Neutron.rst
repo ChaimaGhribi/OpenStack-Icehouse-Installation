@@ -37,9 +37,14 @@ It's also simple and it takes three main steps :
 * Upload the cirros cloud image::
 
     source creds
-    glance image-create --name "cirros-0.3.2-x86_64" --is-public true \
-    --container-format bare --disk-format qcow2 \
-    --location http://cdn.download.cirros-cloud.net/0.3.2/cirros-0.3.2-x86_64-disk.img
+    mkdir /tmp/images
+    
+    wget -P /tmp/images http://download.cirros-cloud.net/0.3.4/cirros-0.3.4-x86_64-disk.img
+    
+    glance image-create --name "cirros-0.3.4-x86_64" --file /tmp/images/cirros-0.3.4-x86_64-disk.img \
+    --disk-format qcow2 --container-format bare --is-public true 
+    
+    rm -r /tmp/images
 
 * List Images::
 
