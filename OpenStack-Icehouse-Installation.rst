@@ -979,6 +979,12 @@ The network node runs the Networking plug-in and different agents (see the Figur
     service neutron-metadata-agent restart
     service dnsmasq restart
 
+* NOTE:dnsmasq restart failed 'dnsmasq: failed to create listening socket for 10.0.1.21: Address already in use'::
+
+    # stop named service
+    service bind9 stop
+    service dnsmasq restart
+
 * Check status::
 
     service neutron-plugin-openvswitch-agent status
